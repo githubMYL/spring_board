@@ -2,6 +2,7 @@ package org.myexam.controllers.members;
 
 import lombok.RequiredArgsConstructor;
 import org.myexam.commons.validators.MobileValidator;
+import org.myexam.commons.validators.PasswordValidator;
 import org.myexam.repositories.MemberRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,7 +10,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class JoinValidator implements Validator, MobileValidator {
+public class JoinValidator implements Validator, MobileValidator, PasswordValidator {
 
     private final MemberRepository memberRepository;
 
@@ -43,7 +44,12 @@ public class JoinValidator implements Validator, MobileValidator {
         /** 1. 아이디 중복 여부 E */
 
         /** 2. 비밀번호 복잡성 체크 (알파벳(대문자, 소문자), 숫자, 특수문자)) S */
-
+//        if (userPw != null && !userPw.isBlank()
+//            && (!alphaCheck(userPw, false)
+//                || !numberCheck(userPw)
+//                || !specialCharsCheck(userPw))) {
+//            errors.reject("userPw", "Validation.complexity.password");
+//        }
         /** 2. 비밀번호 복잡성 체크 (알파벳(대문자, 소문자), 숫자, 특수문자)) E */
 
         /** 3. 비밀번호와 비밀번호 확인 일치 S */

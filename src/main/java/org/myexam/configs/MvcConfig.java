@@ -43,6 +43,7 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**");    // 전체 모든 URL에 적용
     }
 
+    @Bean
     public MessageSource messageSource() {  // 메세지를 사용할 수 있게 해줌
 
         ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
