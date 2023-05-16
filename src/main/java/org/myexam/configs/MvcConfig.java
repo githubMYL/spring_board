@@ -28,12 +28,12 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override   // 정적 경로 설정
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:///" + fileUploadPath);
+                .addResourceLocations("file:///" + fileUploadPath); // 정적 경로 설정
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(siteConfigInterceptor)
-                .addPathPatterns("/**");
+                .addPathPatterns("/**");    // 전체 모든 URL에 적용
     }
 }
