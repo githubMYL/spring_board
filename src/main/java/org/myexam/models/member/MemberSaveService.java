@@ -2,6 +2,7 @@ package org.myexam.models.member;
 
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.myexam.commons.constants.Role;
 import org.myexam.controllers.members.JoinForm;
 import org.myexam.entities.Member;
 import org.myexam.repositories.MemberRepository;
@@ -22,11 +23,12 @@ public class MemberSaveService {
     public void save(JoinForm joinForm) {
 
         Member member = new ModelMapper().map(joinForm, Member.class);
+        member.setRoles(Role.USER);
+
         member.setUserPw(passwordEncoder.encode(joinForm.getUserPw()));
 
         memberRepository.saveAndFlush(member);
 
     }
-
 
 }
