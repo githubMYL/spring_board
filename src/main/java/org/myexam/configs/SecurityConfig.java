@@ -7,13 +7,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration  // 설정클래스로 인식
 public class SecurityConfig {
 
     /** 시큐리티 무력화 작업 S */
+
     @Bean   // 시큐리티 무력화 작업
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.formLogin()
+                .loginPage("/member/login")
+                .usernameParameter("userId")
+                .passwordParameter("userPw")
+                .defaultSuccessUrl("/")
+                .failureForwardUrl("/member/login")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+                .logoutSuccessUrl("/member/login");
         return http.build();
     }
 
