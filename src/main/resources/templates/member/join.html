@@ -13,13 +13,13 @@
             </div>
 
             <div>
-                <input type="text" name="userPw" th:field="*{userPw}" th:placeholder="#{userPw}">
+                <input type="password" name="userPw" th:field="*{userPw}" th:placeholder="#{userPw}">
                 <div class="errors" th:each="err : ${#fields.errors('userPw')}"
                      th:text="${err}"></div>
             </div>
 
             <div>
-                <input type="text" name="userPwRe" th:field="*{userPwRe}" th:placeholder="#{userPwRe}">
+                <input type="password" name="userPwRe" th:field="*{userPwRe}" th:placeholder="#{userPwRe}">
                 <div class="errors" th:each="err : ${#fields.errors('userPwRe')}"
                      th:text="${err}"></div>
             </div>

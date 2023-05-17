@@ -1,5 +1,7 @@
 package org.myexam.configs;
 
+import org.myexam.models.member.LoginFailureHandler;
+import org.myexam.models.member.LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,8 +22,8 @@ public class SecurityConfig {
                 .loginPage("/member/login")
                 .usernameParameter("userId")
                 .passwordParameter("userPw")
-                .defaultSuccessUrl("/")
-                .failureForwardUrl("/member/login")
+                .successHandler(new LoginSuccessHandler())
+                .failureHandler(new LoginFailureHandler())
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
