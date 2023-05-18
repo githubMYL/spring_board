@@ -1,6 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <header th:fragment="common">
-        헤더😎
+        <section class="left">로고</section>
+        <section class="right">
+            <th:block sec:authorize="isAuthenticated()">
+                <a th:href="@{/admin/myinfo}" class="sbtn">회원정보 수정</a>
+                <a th:href="@{/member/logout}" class="sbtn blue">로그아웃</a>
+            </th:block>
+            <th:block sec:authorize="isAnonymous()">
+                <a th:href="@{/member/join}" class="sbtn">회원가입</a>
+                <a th:href="@{/member/login}" class="sbtn blue">로그인</a>
+            </th:block>
+        </section>
     </header>
 </html>
