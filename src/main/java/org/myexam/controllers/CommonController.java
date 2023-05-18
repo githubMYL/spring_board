@@ -1,5 +1,6 @@
 package org.myexam.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.myexam.commons.CommonException;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CommonController {
 
     @ExceptionHandler(Exception.class)
-    public String errorHandler(Exception e, Model model, HttpServletResponse response) {
+    public String errorHandler(Exception e, Model model, HttpServletRequest request, HttpServletResponse response) {
 
         int status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
         if (e instanceof CommonException) {
@@ -20,8 +21,11 @@ public class CommonController {
         }
 
         response.setStatus(status);
+        String URL = request.getRequestURI();
+//        System.out.println("URL ::::::::: "+URL);
 
         model.addAttribute("status", status);
+        model.addAttribute("path", URL);
         model.addAttribute("message", e.getMessage());
         model.addAttribute("exception", e);
 

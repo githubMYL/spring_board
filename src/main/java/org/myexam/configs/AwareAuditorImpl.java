@@ -17,6 +17,6 @@ public class AwareAuditorImpl implements AuditorAware<String> {
 
         String userId= memberUtil.isLogin() ? memberUtil.getMember().getUserId() : null;
 
-        return Optional.ofNullable(userId);
+        return Optional.ofNullable(userId); // Null 값을 허용한다는 것 NullPointException 을 처리하기 위해 사용
     }
 }

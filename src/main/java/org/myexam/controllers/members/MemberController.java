@@ -42,6 +42,10 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login() {
+//        boolean result = true;
+//        if (result) {
+//            throw new RuntimeException("예외발생!");
+//        }
 
         return "member/login";
     }
