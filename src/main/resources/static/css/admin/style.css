@@ -11,14 +11,17 @@ img { border: 0; }
 /** 기준 너비 */
 .layout_width { max-width: 1300px; min-width: 1100px; margin: 0 auto; padding: 0 10px; }
 
-/** 기본 스타일 - 입력 */
+/** 기본 스타일 - 입력 S */
 input[type='text'],
 input[type='number'],
 input[type='password'],
 input[type='email'],
 input[type='date'] { border: 1px solid #d5d5d5; width: 100%; height: 45px; padding: 0 10px; border-radius: 3px; }
+textarea { border: 1px solid #d5d5d5; width: 100%; min-height: 150px; padding: 10px; resize: none; }
 
-/** 기본 스타일 - 체크박스, 라디오 버튼 */
+/** 기본 스타일 - 입력 E */
+
+/** 기본 스타일 - 체크박스, 라디오 버튼 S */
 input[type='checkbox'] { display: none; }
 input[type='checkbox']+label { min-height: 32px; line-height: 1; padding: 3px 0 3px 33px; background:url("../../images/chk-off.png") no-repeat left center; }
 input[type='checkbox']:checkbox+label { background:url("../../images/chk-on.png") no-repeat left center; }
@@ -28,6 +31,8 @@ input[type='radio']+label { min-height: 24px; line-height: 1; padding: 3px 0 3px
 input[type='radio']:checkbox+label { background:url("../../images/radio-on.png") no-repeat left center; }
 
 .dn { display: none !important; }
+
+/** 기본 스타일 - 체크박스, 라디오 버튼 E */
 
 /** 사이트 공통 E */
 
@@ -55,6 +60,10 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 .sbtn { display: inline-block; border: 1px solid #596b99; color: #596b99; min-width: 90px; padding:0 20px; height: 28px; line-height: 26px; text-align: center; border-radius: 5px; }
 .sbtn.blue { color: #fff; background: #596b99; }
 
+.btns { display: flex; width: 400px; margin: 0 auto; }
+.btns >button { width: 0; flex-grow: 1; height: 50px; font-size: 18px; border: 1px solid #000; }
+.btns > button:last-of-type { background: #000; color: #fff; }
+
 /** 기본 버튼 스타일 E */
 
 /** 기본 메세지 상자 스타일 S */
@@ -68,3 +77,13 @@ aside li > a.on:after { content: ''; display: block; position: absolute; width: 
 h1 { font-size: 30px; font-weight: bold; margin: 0; margin-bottom: 25px; line-height: 1; padding: 0; }
 
 /** 기본 제목 스타일 E */
+
+/** 기본 테이블 스타일 S */
+
+.table-cols { width: 100%; border-spacing: 0; padding: 0; border-top: 3px solid #222; margin-bottom: 20px; }
+.table-cols th { background: #f8f8f8; width: 160px;  padding: 10px 30px; text-align: left; }
+.table-cols td { background: #fff; padding: 10px 15px; }
+.table-cols th,
+.table-cols td { border-bottom: 1px solid #d5d5d5; }
+
+/** 기본 테이블 스타일 E */
