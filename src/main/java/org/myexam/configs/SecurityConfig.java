@@ -28,15 +28,11 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/member/login");
 
         http.authorizeHttpRequests()
-<<<<<<< HEAD
+
                 .requestMatchers("/mypage/**").authenticated()      // 회원 전용
 //                .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자 전용
                 .anyRequest().permitAll();  // 그외 모든 페이지는 모든 회원이 접근 가능
-=======
-                .requestMatchers("/mypage/**").authenticated() // 회원 전용
-               // .requestMatchers("/admin/**").hasAuthority("ADMIN") // 관리자 전용
-                .anyRequest().permitAll(); // 그외 모든 페이지는 모든 회원이 접근 가능
->>>>>>> adminpage
+
 
         http.exceptionHandling()
                 .authenticationEntryPoint((req, res, e) -> {
