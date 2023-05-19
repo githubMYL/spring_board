@@ -48,7 +48,7 @@
 	
 ## 4번째
 * 공통 오류 페이지 처리
-<<<<<<< HEAD
+
 	- 일반 컨트롤러 (@ControllerAdvice)
 	- Rest 컨트롤러 (@RestControllerAdvice)
 		- 일반 요청 응답과 오류 통일성 있게 처리 (JSONData)
@@ -59,16 +59,11 @@
 		- CodeValue 엔티티 code(PK), value - JSON
 	
 	- 게시판 설정
-		
-=======
+	- 	
 	- 일반 컨트롤러(@ControllerAdvice)
 	- REST 컨트롤러(@RestControllerAdvice)
 		- 일반 요청 응답과 오류 통일성 있게 처리 (JSONData)
 
-* 관리자페이지
-	- 사이트 설정
-		- 추후에 설정이 많이 추가됨을 고려
-		- CodeValue 엔티티 code(PK), value - JSON
 		
 ## 5번째
 * 관리자페이지
@@ -76,6 +71,4 @@
 	- 게시판 설정
 		- 게시판 설정 == 게시판
 		- 게시판 데이터
-
->>>>>>> adminpage
 	
