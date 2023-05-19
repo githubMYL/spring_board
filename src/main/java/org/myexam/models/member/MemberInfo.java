@@ -20,6 +20,7 @@ public class MemberInfo implements UserDetails {
     private Role roles;
 
     private Collection<GrantedAuthority> authorities;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

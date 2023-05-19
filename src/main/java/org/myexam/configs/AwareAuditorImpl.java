@@ -12,11 +12,12 @@ import java.util.Optional;
 public class AwareAuditorImpl implements AuditorAware<String> {
 
     private final MemberUtil memberUtil;
+
     @Override
     public Optional<String> getCurrentAuditor() {
 
-        String userId= memberUtil.isLogin() ? memberUtil.getMember().getUserId() : null;
+        String userId = memberUtil.isLogin() ? memberUtil.getMember().getUserId() : null;
 
-        return Optional.ofNullable(userId); // Null 값을 허용한다는 것 NullPointException 을 처리하기 위해 사용
+        return Optional.ofNullable(userId);
     }
 }

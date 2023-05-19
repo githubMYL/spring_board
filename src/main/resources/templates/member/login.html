@@ -17,8 +17,10 @@
                 <a th:href="@{/member/find_pw}"><i class="xi-search"></i>[[#{findPw}]]</a>
                 <a th:href="@{/member/join}"><i class="xi-user-plus"></i>[[#{member.join}]]</a>
             </div>
+
+            <div class="errors global" th:if="${session.global != null}" th:text="${session.global}"></div>
+
             <button type="submit" th:text="#{member.action.login}"></button>
-            <div class="errors" th:if="${session.global != null}" th:text="${session.global}"></div>
         </form>
     </main>
 </html>
