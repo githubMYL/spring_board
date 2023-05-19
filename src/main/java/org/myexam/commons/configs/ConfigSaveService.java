@@ -3,8 +3,8 @@ package org.myexam.commons.configs;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.myexam.entities.Configs;
-import org.myexam.repositories.ConfigsRepository;
+import org.koreait.entities.Configs;
+import org.koreait.repositories.ConfigsRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 public class ConfigSaveService {
 
     private final ConfigsRepository repository;
-<<<<<<< HEAD
-=======
 
->>>>>>> adminpage
     public <T> void save(String code, T t) {
 
         Configs configs = repository.findById(code).orElseGet(Configs::new);
@@ -25,11 +22,7 @@ public class ConfigSaveService {
         try {
             value = om.writeValueAsString(t);
         } catch (JsonProcessingException e) {
-<<<<<<< HEAD
-            e.printStackTrace();
-=======
            e.printStackTrace();
->>>>>>> adminpage
         }
 
         configs.setCode(code);
