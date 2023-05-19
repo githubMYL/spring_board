@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor @AllArgsConstructor
 public class JSONData<T> {
     private boolean success;
-    private HttpStatus status = HttpStatus.OK;  // 상태코드 200
+    private HttpStatus status = HttpStatus.OK; // 200
     private String message;
     private T data;
 }

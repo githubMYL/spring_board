@@ -19,15 +19,15 @@ public class MemberController {
     private final MemberSaveService saveService;
     private final JoinValidator joinValidator;
 
-
     @GetMapping("/join")
     public String join(@ModelAttribute JoinForm joinForm, Model model) {
-
+        commonProcess(model);
         return "member/join";
     }
 
     @PostMapping("/join")
-    public String JoinPs(@Valid JoinForm joinForm, Errors errors) {
+    public String joinPs(@Valid JoinForm joinForm, Errors errors, Model model) {
+        commonProcess(model);
 
         joinValidator.validate(joinForm, errors);
 
@@ -42,11 +42,11 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login() {
-//        boolean result = true;
-//        if (result) {
-//            throw new RuntimeException("예외발생!");
-//        }
 
         return "member/login";
+    }
+
+    private void commonProcess(Model model) {
+        model.addAttribute("pageTitle", "회원가입");
     }
 }

@@ -3,7 +3,6 @@ package org.myexam.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.myexam.commons.CommonException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,14 +21,13 @@ public class CommonController {
 
         response.setStatus(status);
         String URL = request.getRequestURI();
-//        System.out.println("URL ::::::::: "+URL);
 
         model.addAttribute("status", status);
         model.addAttribute("path", URL);
         model.addAttribute("message", e.getMessage());
         model.addAttribute("exception", e);
 
-        e.printStackTrace();    // 오류를 콘솔에서 더 자세히 볼 수 있도록 조치
+        e.printStackTrace();
 
         return "error/common";
     }
