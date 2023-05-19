@@ -57,12 +57,6 @@
 	- 사이트 설정
 		- 추후에 설정이 많이 추가됨을 고려
 		- CodeValue 엔티티 code(PK), value - JSON
-	
-	- 게시판 설정
-
-	- 일반 컨트롤러(@ControllerAdvice)
-	- REST 컨트롤러(@RestControllerAdvice)
-		- 일반 요청 응답과 오류 통일성 있게 처리 (JSONData)
 
 		
 ## 5번째
