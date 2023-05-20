@@ -57,6 +57,7 @@
 	- 사이트 설정
 		- 추후에 설정이 많이 추가됨을 고려
 		- CodeValue 엔티티 code(PK), value - JSON
+<<<<<<< HEAD
 	
 	- 게시판 설정
 		
@@ -64,18 +65,19 @@
 	- 일반 컨트롤러(@ControllerAdvice)
 	- REST 컨트롤러(@RestControllerAdvice)
 		- 일반 요청 응답과 오류 통일성 있게 처리 (JSONData)
+=======
+>>>>>>> 2b88846eaec5cfee51273bebd1edd824a832d23d
 
-* 관리자페이지
-	- 사이트 설정
-		- 추후에 설정이 많이 추가됨을 고려
-		- CodeValue 엔티티 code(PK), value - JSON
 		
 ## 5번째
 * 관리자페이지
 	- 사이트 설정
 	- 게시판 설정
+<<<<<<< HEAD
 		- 게시판 설정 == 게시판
 		- 게시판 데이터
 
 
 	
+=======
+>>>>>>> 2b88846eaec5cfee51273bebd1edd824a832d23d

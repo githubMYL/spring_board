@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 public class ConfigSaveService {
 
     private final ConfigsRepository repository;
-<<<<<<< HEAD
-=======
 
->>>>>>> adminpage
     public <T> void save(String code, T t) {
 
         Configs configs = repository.findById(code).orElseGet(Configs::new);
@@ -25,11 +22,7 @@ public class ConfigSaveService {
         try {
             value = om.writeValueAsString(t);
         } catch (JsonProcessingException e) {
-<<<<<<< HEAD
-            e.printStackTrace();
-=======
            e.printStackTrace();
->>>>>>> adminpage
         }
 
         configs.setCode(code);

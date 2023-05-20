@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-<<<<<<< HEAD
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-=======
         xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
->>>>>>> adminpage
     <header th:fragment="common">
         <section class="left">로고</section>
         <section class="right">
             <th:block sec:authorize="isAuthenticated()">
-<<<<<<< HEAD
-                <a th:href="@{/admin/myinfo}" class="sbtn">회원정보 수정</a>
-=======
                 <a th:href="@{/admin/myinfo}" class="sbtn">회원정보수정</a>
->>>>>>> adminpage
                 <a th:href="@{/member/logout}" class="sbtn blue">로그아웃</a>
             </th:block>
             <th:block sec:authorize="isAnonymous()">
