@@ -32,7 +32,7 @@ public class BoardConfigSaveService {
         String  bId = boardForm.getBId();
         Board board =  boardRepository.findById(bId).orElseGet(Board::new);
         String mode = boardForm.getMode();
-        if (mode == null || !mode.equals("update")) {   // 게시판 등록 -> 중복 여부 체크
+        if ((mode == null || !mode.equals("update")) && board.getBId() != null) {   // 게시판 등록 -> 중복 여부 체크
             throw new DuplicateBoardConfigException();
         }
 
