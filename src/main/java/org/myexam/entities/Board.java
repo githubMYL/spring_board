@@ -21,10 +21,10 @@ public class Board extends BaseMemberEntity {
     @Column(name = "isUse")     // 오라클은 상관 없으나 Mysql 에서는 예약어라 문제발생
     private boolean use;        // 게시판 사용 여부
 
-    private int rowOfPage = 20;     // 1 페이지당 게시글 수
+    private int rowsOfPage = 20;     // 1 페이지당 게시글 수
+
     private boolean showViewList;   // 게시슬 하단 목록 노출
 
-    @Lob
     private String category;        // 게시판 분류
 
     // 목록 접근 권한

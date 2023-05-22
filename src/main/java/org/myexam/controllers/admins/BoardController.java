@@ -3,8 +3,10 @@ package org.myexam.controllers.admins;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.myexam.commons.CommonException;
 import org.myexam.commons.MenuDetail;
 import org.myexam.commons.Menus;
+import org.myexam.models.board.config.BoardConfigSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -18,6 +20,7 @@ import java.util.List;
 public class BoardController {
 
     private final HttpServletRequest request;
+    private final BoardConfigSaveService configSaveService;
 
     /**
      * 게시판 목록
@@ -57,7 +60,17 @@ public class BoardController {
         String mode = boardForm.getMode();
         commonProcess(model, mode != null && mode.equals("update") ? "게시판 수정" : "게시판 등록");
 
-        return "redirect:/admin/board";
+        try {
+            configSaveService.save(boardForm, errors);
+        } catch (CommonException e) {
+            errors.rejectValue("BoardConfigError", e.getMessage());
+        }
+
+        if (errors.hasErrors()) {
+            return "admin/board/config";
+        }
+
+        return "redirect:/admin/board";     // 게시판 목록
     }
     private void commonProcess(Model model, String title) {
         String URI = request.getRequestURI();
