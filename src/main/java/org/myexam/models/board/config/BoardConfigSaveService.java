@@ -37,11 +37,11 @@ public class BoardConfigSaveService {
         }
 
         board.setBId(bId);
-        board.setBName(board.getBName());
-        board.setUse(board.isUse());
+        board.setBName(boardForm.getBName());
+        board.setUse(boardForm.isUse());
         board.setRowsOfPage(boardForm.getRowsOfPage());
         board.setShowViewList(boardForm.isShowViewList());
-        board.setCategory(board.getCategory());
+        board.setCategory(boardForm.getCategory());
         board.setListAccessRole(Role.valueOf(boardForm.getListAccessRole()));
         board.setViewAccessRole(Role.valueOf(boardForm.getViewAccessRole()));
         board.setWriteAccessRole(Role.valueOf(boardForm.getWriteAccessRole()));
@@ -54,7 +54,7 @@ public class BoardConfigSaveService {
         board.setUseReply(boardForm.isUseReply());
         board.setUseComment(boardForm.isUseComment());
         board.setSkin(boardForm.getSkin());
-
+        //System.out.println(board);
         boardRepository.saveAndFlush(board);
     }
 }

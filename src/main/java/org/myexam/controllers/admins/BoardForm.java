@@ -1,6 +1,5 @@
 package org.myexam.controllers.admins;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
