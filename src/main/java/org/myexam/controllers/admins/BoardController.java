@@ -8,7 +8,9 @@ import org.myexam.commons.MenuDetail;
 import org.myexam.commons.Menus;
 import org.myexam.entities.Board;
 import org.myexam.models.board.config.BoardConfigInfoService;
+import org.myexam.models.board.config.BoardConfigListService;
 import org.myexam.models.board.config.BoardConfigSaveService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,7 +26,7 @@ public class BoardController {
     private final HttpServletRequest request;
     private final BoardConfigSaveService configSaveService;
     private final BoardConfigInfoService boardConfigInfoService;
-
+    private final BoardConfigListService boardConfigListService;
 
     /**
      * 게시판 목록
@@ -33,8 +35,11 @@ public class BoardController {
      */
 
     @GetMapping
-    public String index(Model model) {
+    public String index(@ModelAttribute BoardSearch boardSearch, Model model) { // 값이 없을수도 있지만 양식에 연동하기 위해서 사용
         commonProcess(model, "게시판 목록");
+        // List 형태로 받아와서 출력
+        Page<Board> data = boardConfigListService.gets(boardSearch);
+        model.addAttribute("items", data.getContent());
 
         return "admin/board/index";
     }
