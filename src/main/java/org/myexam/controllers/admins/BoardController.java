@@ -2,13 +2,19 @@ package org.myexam.controllers.admins;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.myexam.commons.CommonException;
 import org.myexam.commons.MenuDetail;
 import org.myexam.commons.Menus;
+import org.myexam.entities.Board;
+import org.myexam.models.board.config.BoardConfigInfoService;
+import org.myexam.models.board.config.BoardConfigListService;
+import org.myexam.models.board.config.BoardConfigSaveService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,52 +24,82 @@ import java.util.List;
 public class BoardController {
 
     private final HttpServletRequest request;
+    private final BoardConfigSaveService configSaveService;
+    private final BoardConfigInfoService boardConfigInfoService;
+    private final BoardConfigListService boardConfigListService;
 
     /**
      * 게시판 목록
-     *
+     * @param model
      * @return
      */
-    @GetMapping
-    public String index(Model model) {
 
+    @GetMapping
+    public String index(@ModelAttribute BoardSearch boardSearch, Model model) { // 값이 없을수도 있지만 양식에 연동하기 위해서 사용
         commonProcess(model, "게시판 목록");
+        // List 형태로 받아와서 출력
+        Page<Board> data = boardConfigListService.gets(boardSearch);
+        model.addAttribute("items", data.getContent());
 
         return "admin/board/index";
     }
-
-    /**
-     * 게시판 등록
-     * @return
-     */
     @GetMapping("/register")
-    public String register(Model model) {
-
+    public String register(@ModelAttribute BoardForm boardForm, Model model) {
         commonProcess(model, "게시판 등록");
+        return "admin/board/config";
+    }
+
+    @GetMapping("/{bId}/update")
+    public String update(@PathVariable String bId, Model model) {
+        commonProcess(model, "게시판 수정");
+
+        Board board = boardConfigInfoService.get(bId, true);
+        BoardForm boardForm = new ModelMapper().map(board, BoardForm.class);
+        boardForm.setMode("update");
+        boardForm.setListAccessRole(board.getListAccessRole().toString());
+        boardForm.setViewAccessRole(board.getViewAccessRole().toString());
+        boardForm.setWriteAccessRole(board.getWriteAccessRole().toString());
+        boardForm.setReplyAccessRole(board.getReplyAccessRole().toString());
+        boardForm.setCommentAccessRole(board.getCommentAccessRole().toString());
+
+        model.addAttribute("boardForm", boardForm);
 
         return "admin/board/config";
     }
 
-    @GetMapping("/{bid}/update")
-    public String update(@PathVariable String bid, Model model) {
+    @PostMapping("/save")
+    public String save(BoardForm boardForm, Errors errors, Model model) {
+        String mode = boardForm.getMode();
+        commonProcess(model, mode != null && mode.equals("update") ? "게시판수정" : "게시판 등록");
 
-        commonProcess(model, "게시판 수정");
+        try {
+            configSaveService.save(boardForm, errors);
+        } catch (CommonException e) {
+            errors.reject("BoardConfigError", e.getMessage());
+        }
 
-        return "admin/board/config";
+        if (errors.hasErrors()) {
+            return "admin/board/config";
+        }
+
+        return "redirect:/admin/board"; // 게시판 목록
     }
 
     private void commonProcess(Model model, String title) {
+
         String URI = request.getRequestURI();
-//        System.out.println("URI:::::::::::" + URI);
+//        System.out.println("URI::::::::::::::::::::::"+URI);
 
-        // 서브 메뉴 처리
-        String submenuCode = Menus.getSubMenuCode(request);
+        // 서브메뉴 처리
+        String subMenuCode = Menus.getSubMenuCode(request);
+        model.addAttribute("subMenuCode", subMenuCode);
 
-        model.addAttribute("subMenuCode",submenuCode);
         List<MenuDetail> submenus = Menus.gets("board");
         model.addAttribute("submenus", submenus);
 
         model.addAttribute("pageTitle", title);
         model.addAttribute("title", title);
+
+
     }
 }
