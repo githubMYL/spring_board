@@ -43,6 +43,13 @@ public class BoardController {
 
         return "admin/board/index";
     }
+
+    /**
+     * 게시판 등록
+     * @param boardForm
+     * @param model
+     * @return
+     */
     @GetMapping("/register")
     public String register(@ModelAttribute BoardForm boardForm, Model model) {
         commonProcess(model, "게시판 등록");
@@ -52,6 +59,7 @@ public class BoardController {
     @GetMapping("/{bId}/update")
     public String update(@PathVariable String bId, Model model) {
         commonProcess(model, "게시판 수정");
+
 
         Board board = boardConfigInfoService.get(bId, true);
         BoardForm boardForm = new ModelMapper().map(board, BoardForm.class);
@@ -92,6 +100,7 @@ public class BoardController {
 
         // 서브메뉴 처리
         String subMenuCode = Menus.getSubMenuCode(request);
+        subMenuCode = title.equals("게시판 수정") ? "register" : subMenuCode;
         model.addAttribute("subMenuCode", subMenuCode);
 
         List<MenuDetail> submenus = Menus.gets("board");
