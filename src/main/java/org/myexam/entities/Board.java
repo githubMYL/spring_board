@@ -82,11 +82,10 @@ public class Board extends BaseMemberEntity {
      * @return
      */
     public String[] getCategories() {
-        if (category != null) {
+        if (category == null) {
             return null;
         }
         String[] categories = category.replaceAll("\\r", "").trim().split("\\n");
         return categories;
-
     }
 }

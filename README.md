@@ -48,27 +48,38 @@
 	
 ## 4번째
 * 공통 오류 페이지 처리
-	- 일반 컨트롤러(@ControllerAdvice)
-	- REST 컨트롤러(@RestControllerAdvice)
-		- 일반 요청 응답과 오류 통일성 있게 처리 (JSONData)
 
-* 관리자페이지
+	- 일반 컨트롤러 (@ControllerAdvice)
+	- Rest 컨트롤러 (@RestControllerAdvice)
+		- 일반 요청 응답과 오류 통일성 있게 처리 (JSONData)
+	
+* 관리자 페이지
 	- 사이트 설정
 		- 추후에 설정이 많이 추가됨을 고려
 		- CodeValue 엔티티 code(PK), value - JSON
+
+
 		
 ## 5번째
 * 관리자페이지
 	- 사이트 설정
 	- 게시판 설정
-		
+
+
 ## 6번째
 * 관리자페이지
-  * 사이트 설정
+  * 게시판 설정
     * Board : 게시판 설정 엔티티
     * BoardData : 게시글 데이터
   * 게시판 목록
+<<<<<<< HEAD
 
 ## 7번째
 * 관리자 페이지
   * 게시판 목록
+=======
+* 프론트 페이지
+  * 게시글 쓰기
+  * 파일 업로드
+
+>>>>>>> 38b67143c8e9a15fb3b240374eeab7db1420475e
