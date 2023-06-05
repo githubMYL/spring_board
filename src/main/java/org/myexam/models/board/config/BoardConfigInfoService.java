@@ -56,6 +56,9 @@ public class BoardConfigInfoService {
         } else if (location.equals("write")) {  // 글쓰기 권한
             role = board.getWriteAccessRole();
 
+            /** 비회원 게시글 여부 */
+            if (!memberUtil.isLogin()) board.setGuest(true);
+
         } else if (location.equals("reply")) {  // 답글 권한
             role = board.getReplyAccessRole();
 
@@ -63,7 +66,7 @@ public class BoardConfigInfoService {
             role = board.getCommentAccessRole();
         }
         if ((role == Role.USER && memberUtil.isLogin())
-                || role == Role.ADMIN && !memberUtil.isAdmin()){
+                || (role == Role.ADMIN && !memberUtil.isAdmin())){
             throw new BoardNotAllowAccessException();
         }
     }
