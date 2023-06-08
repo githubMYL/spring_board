@@ -83,6 +83,7 @@ public class Board extends BaseMemberEntity {
 
     /**
      * 게시판 분류 목록
+     *
      * @return
      */
     public String[] getCategories() {

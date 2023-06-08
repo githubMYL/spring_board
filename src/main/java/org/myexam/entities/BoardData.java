@@ -15,7 +15,7 @@ public class BoardData extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)  // 매번 가져오지 않고 필요할 때만 조회 할 수 있게함
     @JoinColumn(name = "bId")
-    private String bId;
+    private Board board;
 
     private String gid;         // 그룹 Id 파일 올릴때 필요함
 

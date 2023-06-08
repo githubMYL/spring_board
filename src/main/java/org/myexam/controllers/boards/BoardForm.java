@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.myexam.entities.Member;
+
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public class BoardForm {
     @NotBlank
     private String poster;      // 작성자
 
-    private String guestPw;     // 비회원 비밀번호
+    private String guestPw;     // 비회원 비밀번호 선택적으로 필수 (로그인하지 않을때)
 
     private String category;    // 게시판 분류
 
