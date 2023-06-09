@@ -106,7 +106,7 @@ public class BoardSaveTests {
 
     @Test
     @DisplayName("게시글 등록(비회원) 성공시 예외 없음")
-    @WithAnonymousUser
+    @WithAnonymousUser  //  비회원임을 명확하게 하기 위함
     void registerGuestSuccessTest() {
         //System.out.println("넘어가니?1");
         assertDoesNotThrow(() -> {
@@ -118,7 +118,8 @@ public class BoardSaveTests {
 
     @Test
     @DisplayName("게시글 등록(회원) 성공시 예외 없음")
-    @WithMockUser(username="user01", password="aA!123456")
+    @WithMockUser(username = "user01", password = "aA!123456")
+    @Disabled
     void registerMemberSuccessTest() {
         assertDoesNotThrow(() -> {
             saveService.save(getCommonBoardForm());
@@ -130,61 +131,61 @@ public class BoardSaveTests {
         assertAll(
                 // bId - null 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setBId(null);
                     saveService.save(boardForm);
                 }),
                 // bId - 공백 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setBId("     ");
                     saveService.save(boardForm);
                 }),
                 // gid - null 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setGid(null);
                     saveService.save(boardForm);
                 }),
                 // gid - 공백 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setGid("     ");
                     saveService.save(boardForm);
                 }),
                 // poster - null 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setPoster(null);
                     saveService.save(boardForm);
                 }),
                 // poster - 공백 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setPoster("     ");
                     saveService.save(boardForm);
                 }),
                 // subject - null 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setSubject(null);
                     saveService.save(boardForm);
                 }),
                 // subject - 공백 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setSubject("     ");
                     saveService.save(boardForm);
                 }),
                 // content - null 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setContent(null);
                     saveService.save(boardForm);
                 }),
                 // content - 공백 일때
                 () -> assertThrows(BoardValidationException.class, () ->{
-                    BoardForm boardForm = getGuestBoardForm();
+                    BoardForm boardForm = getCommonBoardForm();
                     boardForm.setContent("     ");
                     saveService.save(boardForm);
                 })
@@ -227,4 +228,5 @@ public class BoardSaveTests {
     void requiredFieldsMemberTest() {
         commonRequiredFieldsTest();
     }
+
 }

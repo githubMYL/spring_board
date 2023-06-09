@@ -7,13 +7,24 @@ public interface LengthValidator {
      * @param min 최소 문자 갯수 -> 0일때는 체크 X
      * @param max 최대 문자 갯수 -> 0일때는 체크 X
      */
-    default void strLengthCheck(String str, int min, int max, RuntimeException e) {
+    default void lengthCheck(String str, int min, int max, RuntimeException e) {    // 문자열 체크
         if (str == null || (min > 0 && str.length() < min) || (max > 0 && str.length() > max)) {
             throw e;
         }
     }
 
-    default void strLengthCheck(String str, int min, RuntimeException e) {
-        strLengthCheck(str, min, 0, e);
+    default void lengthCheck(String str, int min, RuntimeException e) {
+        lengthCheck(str, min, 0, e);
+    }
+
+    default void lengthCheck(long num, int min, int max, RuntimeException e) {  // 숫자의 범위 체크
+        if (num < min || num > max) {
+            throw e;
+        }
+    }
+    default void lengthCheck(long num, int min, RuntimeException e) {
+        if (num < min) {
+            throw e;
+        }
     }
 }
