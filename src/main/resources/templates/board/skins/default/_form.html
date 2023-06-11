@@ -21,8 +21,7 @@
             <dt th:text="#{board.category}"></dt>
             <dd>
                 <th:block th:each="category, status : ${board.categories}">
-                    <input type="radio" name="category" th:value="${category}"
-                           th:id="${'category_' + status.index}">
+                    <input type="radio" name="category" th:value="${category}" th:id="${'category_' + status.index}">
                     <label th:for="${'category_' + status.index}" th:text="${category}"></label>
                 </th:block>
             </dd>

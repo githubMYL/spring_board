@@ -1,5 +1,6 @@
 package org.myexam.tests;
 
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +23,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 import java.util.UUID;
 
@@ -59,8 +66,7 @@ public class BoardSaveTests {
     @BeforeEach
     @Transactional
     void init() {
-        // 사이트 설정 등록
-        siteConfigSaveService.save("siteConfig", new ConfigForm());
+
 
         // 게시판 설정 추가
         org.myexam.controllers.admins.BoardForm boardForm = new org.myexam.controllers.admins.BoardForm();
@@ -229,4 +235,15 @@ public class BoardSaveTests {
         commonRequiredFieldsTest();
     }
 
+    @Test
+    @DisplayName("통합테스트 - 비회원 게시글 작성 유효성 검사")
+    void requiredFieldsGuestControllerTest() throws Exception { // h2DB 의 예약어 문제로 오류발생
+        BoardForm boardForm = getGuestBoardForm();
+        mockMvc.perform(post("/board/save")
+                .param("bId", boardForm.getBId())
+                .param("gid", boardForm.getGid())
+                        .with(csrf().asHeader()))   // post방식일때 스프링시큐리티를 안넣으면 보안적인 문제 때문에 안됨.
+                .andDo(print());
+
+    }
 }

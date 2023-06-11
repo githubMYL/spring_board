@@ -86,10 +86,10 @@ public class BoardController {
 
         saveService.save(boardForm);
 
-        // 게시글 작성 후 이동 설정 - 목록, 글보기
+        // 작성후 이동 설정 - 목록, 글보기
         String location = board.getLocationAfterWriting();
         String url = "redirect:/board/";
-        url += location == "view" ? "view/" + boardForm.getId() : "list";   // 글보기이면 글보기(상세보기)로 이동 아닐때는 list로 이동
+        url += location.equals("view") ? "view/" + boardForm.getId() : "list/" + boardForm.getBId();   // 글보기이면 글보기(상세보기)로 이동 아닐때는 list로 이동
 
         return url;
     }

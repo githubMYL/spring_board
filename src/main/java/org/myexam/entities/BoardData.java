@@ -27,32 +27,31 @@ public class BoardData extends BaseEntity {
     private String gid = UUID.randomUUID().toString();  // 그룹 Id 파일 올릴때 필요함 (없으면 기본으로 랜덤생성)
 
     @Column(length = 40, nullable = false)
-    private String poster;      // 작성자
+    private String poster; // 작성자
 
     @Column(length = 65)
-    private String guestPw;     // 비회원 비밀번호
+    private String guestPw; // 비회원 비밀번호
 
     @Column(length = 60)
-    private String category;    // 게시판 분류
+    private String category; // 게시판 분류
 
     @Column(nullable = false)
-    private String subject;     // 제목
+    private String subject; // 제목
 
     @Lob
     @Column(nullable = false)
-    private String content;     // 내용
-
-    private int hit;            // 조회수
+    private String content; // 내용
+    private int hit; // 조회수
 
     @Column(length = 125)
-    private String ua;          // User-Agent : 브라우저 정보
+    private String ua; // User-Agent : 브라우저 정보
 
     @Column(length = 20)
-    private String ip;          // 작성자 IP 주소
+    private String ip; // 작성자 IP
 
-    private int commentCnt;     // 댓글 수
+    private int commentCnt; // 댓글 수
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userNo")
-    private Member member;      // 작성 회원
+    private Member member; // 작성 회원
 }
