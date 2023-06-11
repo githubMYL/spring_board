@@ -2,6 +2,7 @@ package org.myexam.configs;
 
 import lombok.RequiredArgsConstructor;
 import org.myexam.configs.interceptors.SiteConfigInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -15,15 +16,16 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@RequiredArgsConstructor
 @EnableJpaAuditing
 public class MvcConfig implements WebMvcConfigurer {
 
     @Value("${file.upload.path}")
     private String fileUploadPath;
-    
+
     // 사이트 설정 유지 인터셉터
-    private final SiteConfigInterceptor siteConfigInterceptor;
+    @Autowired
+    private SiteConfigInterceptor siteConfigInterceptor;
+
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {

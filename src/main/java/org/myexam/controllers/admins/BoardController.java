@@ -1,8 +1,8 @@
 package org.myexam.controllers.admins;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.myexam.commons.CommonException;
 import org.myexam.commons.MenuDetail;
 import org.myexam.commons.Menus;
@@ -10,6 +10,7 @@ import org.myexam.entities.Board;
 import org.myexam.models.board.config.BoardConfigInfoService;
 import org.myexam.models.board.config.BoardConfigListService;
 import org.myexam.models.board.config.BoardConfigSaveService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,22 +31,27 @@ public class BoardController {
 
     /**
      * 게시판 목록
-     * @param model
+     *
      * @return
      */
-
     @GetMapping
-    public String index(@ModelAttribute BoardSearch boardSearch, Model model) { // 값이 없을수도 있지만 양식에 연동하기 위해서 사용
+    public String index(@ModelAttribute BoardSearch boardSearch, Model model) {
         commonProcess(model, "게시판 목록");
-        // List 형태로 받아와서 출력
+
         Page<Board> data = boardConfigListService.gets(boardSearch);
         model.addAttribute("items", data.getContent());
 
         return "admin/board/index";
     }
+
+    /**
+     * 게시판 등록
+     * @return
+     */
     @GetMapping("/register")
     public String register(@ModelAttribute BoardForm boardForm, Model model) {
         commonProcess(model, "게시판 등록");
+
         return "admin/board/config";
     }
 
@@ -68,9 +74,9 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(BoardForm boardForm, Errors errors, Model model) {
+    public String save(@Valid BoardForm boardForm, Errors errors, Model model) {
         String mode = boardForm.getMode();
-        commonProcess(model, mode != null && mode.equals("update") ? "게시판수정" : "게시판 등록");
+        commonProcess(model, mode != null && mode.equals("update") ? "게시판 수정" : "게시판 등록");
 
         try {
             configSaveService.save(boardForm, errors);
@@ -82,16 +88,18 @@ public class BoardController {
             return "admin/board/config";
         }
 
+
         return "redirect:/admin/board"; // 게시판 목록
     }
 
     private void commonProcess(Model model, String title) {
-
         String URI = request.getRequestURI();
-//        System.out.println("URI::::::::::::::::::::::"+URI);
 
-        // 서브메뉴 처리
+        // 서브 메뉴 처리
         String subMenuCode = Menus.getSubMenuCode(request);
+
+        subMenuCode = title.equals("게시판 수정") ? "register" : subMenuCode;
+
         model.addAttribute("subMenuCode", subMenuCode);
 
         List<MenuDetail> submenus = Menus.gets("board");
@@ -99,7 +107,5 @@ public class BoardController {
 
         model.addAttribute("pageTitle", title);
         model.addAttribute("title", title);
-
-
     }
 }

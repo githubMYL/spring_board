@@ -29,7 +29,7 @@ public class CommonException extends RuntimeException {
         this.httpStatus = httpStatus;
     }
 
-    public HttpStatus getStatus() { // 상태
+    public HttpStatus getStatus() {
         return httpStatus;
     }
 }

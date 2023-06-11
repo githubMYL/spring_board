@@ -73,20 +73,24 @@ public class Board extends BaseMemberEntity {
     // 댓글 사용 여부
     private boolean useComment;
 
+    /** 비회원 작성, 수정 모드 여부 */
+    @Transient
+    private boolean isGuest;
+
     // 게시판 스킨
     @Column(length=20, nullable=false)
     private String skin = "default";
 
     /**
      * 게시판 분류 목록
+     *
      * @return
      */
     public String[] getCategories() {
-        if (category != null) {
+        if (category == null) {
             return null;
         }
         String[] categories = category.replaceAll("\\r", "").trim().split("\\n");
         return categories;
-
     }
 }
